@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200">
+  <defs>
+    <radialGradient id="bg" cx="48%" cy="35%" r="78%">
+      <stop stop-color="#fffdf8"/>
+      <stop offset="1" stop-color="#eee9df"/>
+    </radialGradient>
+    <radialGradient id="fur" cx="44%" cy="35%" r="70%">
+      <stop stop-color="#fff2dd"/>
+      <stop offset=".64" stop-color="#eadbc5"/>
+      <stop offset="1" stop-color="#cdb99b"/>
+    </radialGradient>
+    <radialGradient id="face" cx="43%" cy="32%" r="75%">
+      <stop stop-color="#fff4e7"/>
+      <stop offset=".7" stop-color="#f7e7d2"/>
+      <stop offset="1" stop-color="#ead2b7"/>
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="13"/>
+    </filter>
+    <filter id="grain" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3" seed="12" result="noise"/>
+      <feComposite in="noise" in2="SourceGraphic" operator="in" result="texture"/>
+      <feBlend in="SourceGraphic" in2="texture" mode="soft-light"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#bg)"/>
+  <ellipse cx="590" cy="600" rx="402" ry="390" fill="#bca789" opacity=".22" filter="url(#soft)"/>
+  <path
+    d="M215 617c0-224 154-405 375-405 220 0 389 171 389 400 0 227-162 407-381 407-220 0-383-177-383-402Z"
+    fill="url(#fur)"
+    filter="url(#grain)"
+  />
+  <ellipse cx="589" cy="650" rx="278" ry="244" fill="url(#face)" filter="url(#grain)"/>
+  <ellipse cx="350" cy="615" rx="45" ry="67" fill="#f1b7ad" opacity=".2" filter="url(#soft)"/>
+  <ellipse cx="825" cy="615" rx="44" ry="67" fill="#f1b7ad" opacity=".18" filter="url(#soft)"/>
+  <ellipse cx="419" cy="577" rx="37" ry="47" fill="#171614"/>
+  <ellipse cx="751" cy="577" rx="37" ry="47" fill="#171614"/>
+  <ellipse cx="429" cy="559" rx="10" ry="15" fill="#fff" opacity=".9"/>
+  <ellipse cx="761" cy="559" rx="10" ry="15" fill="#fff" opacity=".9"/>
+  <path d="M534 684c27 35 96 37 127-4-9 61-107 66-127 4Z" fill="#29231e"/>
+  <path d="M548 686c28 13 78 13 101-3-13 31-83 34-101 3Z" fill="#fff8ee"/>
+</svg>

@@ -1,0 +1,41 @@
+{
+  "name": "neural-jackpot-ai-wars",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A mathematically transparent, fully playable Three.js AI-themed slot machine using fictional credits only.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "validate:rtp": "tsx scripts/validate-rtp.ts",
+    "simulate": "tsx scripts/simulate.ts --spins=1000000 --seed=2049"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
+    "@react-three/postprocessing": "^2.19.1",
+    "gsap": "^3.12.7",
+    "postprocessing": "^6.36.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.171.0",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@types/three": "^0.171.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5",
+    "vitest": "^3.2.7"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
