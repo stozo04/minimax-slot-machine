@@ -152,14 +152,15 @@ export const BET_MULTIPLIERS = [1, 5, 10] as const;
 
 const museOverride = import.meta.env?.VITE_MUSE_LOGO_URL;
 const museGlowOverride = import.meta.env?.VITE_MUSE_GLOW_COLOR;
+const assetBase = `${import.meta.env.BASE_URL}assets/`;
 
 export const ASSET_URLS: Record<SymbolId, string> = {
-  BLANK: '/assets/blank.svg',
-  GROK: '/assets/grok.svg',
-  CHATGPT: '/assets/chatgpt.svg',
-  MUSE: museOverride || '/assets/muse-user.svg',
-  ANTHROPIC: '/assets/anthropic.svg',
-  GEMINI: '/assets/gemini.svg',
+  BLANK: `${assetBase}blank.svg`,
+  GROK: `${assetBase}grok.svg`,
+  CHATGPT: `${assetBase}chatgpt.svg`,
+  MUSE: museOverride || `${assetBase}muse-user.svg`,
+  ANTHROPIC: `${assetBase}anthropic.svg`,
+  GEMINI: `${assetBase}gemini.svg`,
 };
 
 export const REACTION_COLORS: Record<SymbolId, string> = {

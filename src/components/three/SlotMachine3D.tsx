@@ -30,7 +30,7 @@ import {
 } from 'three';
 import { soundManager } from '../../audio/SoundManager';
 import { animationController } from '../../game/AnimationController';
-import { ASSET_URLS, PAY_LINES } from '../../game/config';
+import { ASSET_URLS, PAY_LINES, REEL_STRIPS } from '../../game/config';
 import type {
   GamePhase,
   SpinOutcome,
@@ -584,7 +584,7 @@ function Reel({
     if (progress < 1) {
       const stripAtPosition = (offset: number) => {
         const index = (center + offset + stripLength) % stripLength;
-        const configuredStrip = gameStripForReel(reelIndex);
+        const configuredStrip = REEL_STRIPS[reelIndex];
         return configuredStrip[index];
       };
 
@@ -611,9 +611,9 @@ function Reel({
 
     if (progress > 0.82 && progress < 1 && reelGroup.current) {
       reelGroup.current.position.x =
-        Math.sin(progress * Math.PI * 14) * (1 - progress) * 0.035;
+        positionX + Math.sin(progress * Math.PI * 14) * (1 - progress) * 0.035;
     } else if (reelGroup.current) {
-      reelGroup.current.position.x = 0;
+      reelGroup.current.position.x = positionX;
     }
 
     if (progress >= 1 && !stopped.current) {
@@ -629,8 +629,8 @@ function Reel({
 
   return (
     <group ref={reelGroup} position={[positionX, 0, 0]}>
-      <mesh ref={drum} rotation={[0, 0, Math.PI / 2]} castShadow receiveShadow>
-        <cylinderGeometry args={[1.18, 1.18, 2.38, 64]} />
+      <mesh ref={drum} position={[0, 0, -1]} rotation={[0, 0, Math.PI / 2]} castShadow receiveShadow>
+        <cylinderGeometry args={[1.18, 1.18, 1.12, 64]} />
         <meshStandardMaterial
           color="#050912"
           metalness={0.82}
@@ -638,8 +638,8 @@ function Reel({
         />
       </mesh>
 
-      <mesh rotation={[0, 0, Math.PI / 2]}>
-        <cylinderGeometry args={[1.2, 1.2, 2.4, 48, 1, true]} />
+      <mesh position={[0, 0, -1]} rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[1.2, 1.2, 1.14, 48, 1, true]} />
         <meshBasicMaterial
           ref={blurMaterial}
           color="#b8d8ff"
@@ -665,33 +665,13 @@ function Reel({
               texture={textures[symbol]}
               position={[0, y, 0.26]}
               highlighted={highlightedCells.has(`${reelIndex}:${row}`)}
+              visible={symbol === REEL_STRIPS[reelIndex][(row + stripLength - 1) % stripLength]}
             />
           ))}
         </group>
       ))}
     </group>
   );
-}
-
-function gameStripForReel(reelIndex: number): readonly SymbolId[] {
-  const configuredStrips: readonly (readonly SymbolId[])[] = [
-    [
-      'BLANK', 'GROK', 'BLANK', 'CHATGPT', 'MUSE', 'BLANK', 'ANTHROPIC', 'BLANK', 'GROK', 'BLANK',
-    ],
-    [
-      'CHATGPT', 'BLANK', 'GROK', 'BLANK', 'GEMINI', 'MUSE', 'BLANK', 'CHATGPT', 'BLANK', 'GROK',
-    ],
-    [
-      'BLANK', 'MUSE', 'BLANK', 'GROK', 'BLANK', 'CHATGPT', 'ANTHROPIC', 'BLANK', 'GEMINI', 'BLANK',
-    ],
-    [
-      'GROK', 'BLANK', 'CHATGPT', 'BLANK', 'MUSE', 'BLANK', 'GROK', 'ANTHROPIC', 'BLANK', 'BLANK',
-    ],
-    [
-      'ANTHROPIC', 'BLANK', 'BLANK', 'GEMINI', 'CHATGPT', 'BLANK', 'MUSE', 'GROK', 'BLANK', 'BLANK',
-    ],
-  ];
-  return configuredStrips[reelIndex];
 }
 
 function WinParticles({ amount, grand }: { amount: number; grand: boolean }) {

@@ -9,6 +9,7 @@ interface SymbolTileProps {
   texture: Texture;
   position: [number, number, number];
   highlighted: boolean;
+  visible: boolean;
 }
 
 export function SymbolTile({
@@ -16,6 +17,7 @@ export function SymbolTile({
   texture,
   position,
   highlighted,
+  visible,
 }: SymbolTileProps) {
   const materialRef = useRef<MeshPhysicalMaterial>(null);
   const reaction = REACTION_COLORS[symbol];
@@ -31,7 +33,7 @@ export function SymbolTile({
   }, [highlighted]);
 
   return (
-    <group position={position}>
+    <group position={position} visible={visible}>
       <RoundedBox
         args={[1.08, 1.18, 0.14]}
         radius={0.08}
