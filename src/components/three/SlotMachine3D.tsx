@@ -1,4 +1,5 @@
 import {
+  Suspense,
   useCallback,
   useEffect,
   useMemo,
@@ -152,12 +153,14 @@ export default function SlotMachine3D({
           onSpinRequest={onSpinRequest}
         />
 
-        <Reels
-          outcome={outcome}
-          reducedMotion={reducedMotion}
-          skipToken={skipToken}
-          onComplete={onComplete}
-        />
+        <Suspense fallback={null}>
+          <Reels
+            outcome={outcome}
+            reducedMotion={reducedMotion}
+            skipToken={skipToken}
+            onComplete={onComplete}
+          />
+        </Suspense>
 
         <PaylineHighlights wins={outcome?.wins ?? []} />
 
